@@ -1,22 +1,55 @@
-const API_URL = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=a65ab9594ab22b70d45552acd545237e&page=1'
+
+///for project with the MET data
+const MET_API_URL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=Auguste%20Renoir'
+const MET_IMG_PATH = 'https://images.metmuseum.org/CRDImages/ep/web-large/DT49.jpg'
+const SEARCH_MET_API = 'https://collectionapi.metmuseum.org/public/collection/v1/search?q='
+
+
+const formMet = document.getElementById('form')
+const searchMet = document.getElementById('search')
+
+getPaintings(MET_API_URL)
+
+async function getPaintings(url) {
+    const res = await fetch(url)
+    const data = await res.json()
+
+    console.log(data.objectIDs.length)
+    console.log(data.objectIDs)
+}
+
+formMet.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    const searchTerm = searchMet.value
+
+    if(searchTerm && searchTerm !== '') {
+        getPaintings(SEARCH_MET_API + searchTerm)
+
+        search.value = ''
+    } else {
+        window.location.reload()
+    }
+})
+
 
 const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
 const SEARCH_API = 'https:////api.themoviedb.org/3/search/movie?api_key=a65ab9594ab22b70d45552acd545237e&query="'
 
 const main = document.getElementById('main')
-const form = document.getElementById('form')
-const search = document.getElementById('search')
+// const form = document.getElementById('form')
+// const search = document.getElementById('search')
 
 //get initial movies
-getMovies(API_URL)
+//getMovies(API_URL)
 
 
-async function getMovies(url) {
-    const res = await fetch(url)
-    const data = await res.json()
+// async function getMovies(url) {
+//     const res = await fetch(url)
+//     const data = await res.json()
 
-    showMovies(data.results)
-}
+//     showMovies(data.results)
+// }
 
 function showMovies(movies) {
     main.innerHTML = ''
@@ -54,18 +87,18 @@ function getClassByRate(vote) {
     }
 }
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault()
+// form.addEventListener('submit', (e) => {
+//     e.preventDefault()
 
-    const searchTerm = search.value
+//     const searchTerm = search.value
 
-    if(searchTerm && searchTerm !== '') {
-        getMovies(SEARCH_API + searchTerm)
+//     if(searchTerm && searchTerm !== '') {
+//         getMovies(SEARCH_API + searchTerm)
 
-        search.value = ''
-    } else {
-        window.location.reload()
-    }
-})
+//         search.value = ''
+//     } else {
+//         window.location.reload()
+//     }
+// })
 
 
