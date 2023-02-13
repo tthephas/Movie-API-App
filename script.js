@@ -19,6 +19,7 @@ async function getPaintings(url) {
     const objectID = data.objectID
     const department = data.department
     const objectName = data.objectName
+    const creditLine = data.creditLine
 
     main.innerHTML = ''
 
@@ -29,12 +30,12 @@ async function getPaintings(url) {
     
         <img src="${primaryImageSmall}" alt="${objectID}">
         <div class="movie-info">
-        <h3>${objectID}</h3>
+        <h3></h3>
         <span >${department}</span>
         </div>
         <div class="overview">
         <h3> Overview</h3>
-            ${objectName}
+            ${creditLine}
         
         </div>
     `
